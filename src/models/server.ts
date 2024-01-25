@@ -3,7 +3,8 @@ import routesPlans from '../routes/planes.routes';
 import routesUser from '../routes/user.routes';
 import { Plan } from './plan';
 import { User } from './user';
-import cors from 'cors';
+import cors from 'cors'
+
 
 
 
@@ -13,10 +14,9 @@ export class Server {
 
     constructor(){
         this.app = express();
-        this.port =  process.env.PORT || '3001';
+        this.port =  process.env.PORT || '3002';
         this.listen();
         this.midlewares();
-        this.cors;
         this.routes();
         this.dbConnect();
     }
@@ -26,9 +26,6 @@ export class Server {
             console.log(`Server is running on http://localhost:${this.port}`.magenta)
         })
     }
-    cors(){
-        this.app.use(cors())
-    }
 
     routes(){
         this.app.use('/api/plans', routesPlans)
@@ -36,6 +33,7 @@ export class Server {
     }
 
     midlewares(){
+        this.app.use(cors())
         this.app.use(express.json())
     }
     
